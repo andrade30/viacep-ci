@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "234af88d-5f91-4c96-a881-3d3f82dfda42",
+		"name": "viacep-consulta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21061797",
+		"_collection_link": "https://martian-star-8252.postman.co/workspace/c00865f2-a5bf-48d4-a0e7-b859071a2b68/collection/21061797-234af88d-5f91-4c96-a881-3d3f82dfda42?action=share&source=collection_link&creator=21061797"
+	},
+	"item": [
+		{
+			"name": "viacep-consulta",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function zipCode(){\r",
+							"\r",
+							"    var zipCode = [\"02077-045\",\"31846-022\",\"69020-083\",\"85892-387\", \"41321-205\",\"05892-387\",\"31741-651\",\"74786-610\",\"38672-772\",\"69086-180\"];\r",
+							"\r",
+							"    var randomItem = zipCode[Math.floor(Math.random() * zipCode.length)];\r",
+							"\r",
+							"    return randomItem;\r",
+							"}\r",
+							"\r",
+							"pm.variables.set(\"ZipCode\", zipCode());"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{ZipCode}}/json/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{ZipCode}}",
+						"json",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
